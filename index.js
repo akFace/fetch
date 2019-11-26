@@ -22,7 +22,7 @@ Vue.mixin({
             // 支持name和url
             apiUrl = options.url || apiUrl
             // 支持methods和method
-            options.methods = options.methods || options.method
+            options.method = options.method || options.methods
             options.headers = options.headers || {}
             options.data = options.data || {}
             
@@ -31,7 +31,7 @@ Vue.mixin({
             options.data.versioncode = versioncode
 
             // 处理get请求
-            if (options.methods.toLowerCase() === 'get' && options.data) {
+            if (options.method.toLowerCase() === 'get' && options.data) {
                 apiUrl += '?';
                 for (let key in options.data) {
                     apiUrl += `&${key}=${options.data[key]}`
@@ -39,7 +39,7 @@ Vue.mixin({
             }
             return new Promise((resolve, reject) => {
                 stream.fetch({
-                    method: options.methods,
+                    method: options.method,
                     url: apiUrl,
                     type: options.type || 'json',
                     headers: {
