@@ -34,7 +34,7 @@ export default {
             params.page = 1;
             this.$fetch({
                 name: 'getArticleList', // api.js文件中的key
-                methods: 'GET',
+                method: 'GET',
                 data: params,
             }).then((res) => {
             	// 返回数据

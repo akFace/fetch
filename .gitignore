@@ -1,0 +1,9 @@
+/.idea
+/.temp
+/common/backup/*
+/common/dist/*
+/node_modules
+/plugins-dev
+.DS_Store
+package-lock.json
+local.properties

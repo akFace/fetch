@@ -1,5 +1,5 @@
-const eeui = app.requireModule('eeui');
-const stream = app.requireModule('stream');
+const eeui = app.requireModule('eeui')
+const stream = app.requireModule('stream')
 // import MD5 from 'blueimp-md5'  // 可以引入npm包，当你需要时
 
 import apiList from './api/apis.js'
@@ -17,14 +17,18 @@ Vue.mixin({
         $fetch(options) {
 
             // 缓存获取登录token
-            let user_token = eeui.getCachesString('user_token');
-            let apiUrl = `${API_BaseUrl}${apiList[options.name]}`;
-
-            options.data = options.data || {};
-
+            let user_token = eeui.getCachesString('user_token')
+            let apiUrl = `${API_BaseUrl}${apiList[options.name]}`
+            // 支持name和url
+            apiUrl = options.url || apiUrl
+            // 支持methods和method
+            options.methods = options.methods || options.method
+            options.headers = options.headers || {}
+            options.data = options.data || {}
+            
             // 添加自定义全局参数，比如APP版本号
-            let versioncode = weex.config.env.appVersion;
-            options.data.versioncode = versioncode;
+            let versioncode = weex.config.env.appVersion
+            options.data.versioncode = versioncode
 
             // 处理get请求
             if (options.methods.toLowerCase() === 'get' && options.data) {
@@ -37,10 +41,11 @@ Vue.mixin({
                 stream.fetch({
                     method: options.methods,
                     url: apiUrl,
-                    type: 'json',
+                    type: options.type || 'json',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Cookie': `token=${user_token}` // 设置cookie
+                        'Cookie': `token=${user_token}`, // 设置cookie
+                        ...options.headers
                     },
                     body: JSON.stringify(options.data)
                 }, (res) => {
@@ -50,7 +55,7 @@ Vue.mixin({
                         // if (data.error === 1) {
                         //    eeui.toast('加载出错了');
                         // }
-                        resolve(data);
+                        resolve(data)
                     } else {
                         reject(res)
                     }
