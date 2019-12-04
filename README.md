@@ -1,12 +1,24 @@
 ## eeui封装全局请求
-#### 用法和eros一模一样，方便使用 - [eros文档](https://bmfe.github.io/eros-docs/#/zh-cn/eros_widget?id=axios%ef%bc%88%e8%af%b7%e6%b1%82%ef%bc%89)
+
 #### 安装方法，下载到自己的项目中，放到src目录下
-示例：
+
+
+Api：
+
+- method（String）：请求方式，分为GET、POST、HEAD、PUT、DELETE、PATCH。(必须大写)
+- name（String）：请求地址，如果已经在api/apis.js下配置了接口的请求别名，则可以直接调用别名。
+- url（String）: 如果你不想配置别名，可以直接输入相对路径或者绝对路径来请求。
+- data（Object）：请求携带的参数。
+- headers（Object）：当前请求的请求头设置。
+- then（Promise）：Promise接口返回时候会触发。
+
+
+### 示例：
 
 ```vue
 <template>
     <div class="app">
-        <text>组件</text>
+        <text>首页</text>
     </div>
 </template>
 <style>
